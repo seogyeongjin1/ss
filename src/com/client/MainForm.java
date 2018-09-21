@@ -328,7 +328,7 @@ implements ActionListener,Runnable,MouseListener{
 				    		st.nextToken(),	
 				    		st.nextToken(),	
 				    		st.nextToken(),	
-				    		st.nextToken()
+				    		st.nextToken(),
 				    	};
 				    	wr.model2.addRow(data);
 				    }
