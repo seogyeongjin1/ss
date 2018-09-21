@@ -309,7 +309,7 @@ implements ActionListener,Runnable,MouseListener{
 	{
 		try
 		{
-			s=new Socket("211.238.142.63",7788);
+			s=new Socket("211.238.142.55",7700);
 			in=new BufferedReader(
 					new InputStreamReader(s.getInputStream())); 
 			out=s.getOutputStream();

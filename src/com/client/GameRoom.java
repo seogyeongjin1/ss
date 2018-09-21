@@ -11,17 +11,17 @@ public class GameRoom extends JPanel{
 		   "임수향","제니","조보아","조세호",
 		   "지민","차은우","케이윌","피오","하성운","한지민",
 		   "헨리","홍진영"};
-   private String path="C:\\javaDev\\Image\\gameImage\\";
+   private String path="Image\\gameImage\\";
    int index=0;
    Image img;
    public GameRoom()
    {
 	   //setBackground(Color.PINK);
-	   img=Toolkit.getDefaultToolkit().getImage("C:\\javaDev\\Image\\loginback.jpg");
+	   img=Toolkit.getDefaultToolkit().getImage("Image\\loginback.jpg");
    }
    public void setImage()
    {
-	   img=Toolkit.getDefaultToolkit().getImage("C:\\javaDev\\Image\\ready.jpg");
+	   img=Toolkit.getDefaultToolkit().getImage("Image\\ready.jpg");
        repaint();
    }
    public void setImage(int no)
