@@ -88,8 +88,8 @@ public class Login extends JPanel implements ItemListener{
     	 add(tf1);
     	 add(tf2);
     	 add(box);
-    	 add(av1);add(av2);add(av3);
-    	 add(rb1);add(rb2);add(rb3);
+    	 //add(av1);add(av2);add(av3);
+    	 //add(rb1);add(rb2);add(rb3);
     	
     	 box.addItemListener(this);
     	 box.setOpaque(false);
