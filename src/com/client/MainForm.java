@@ -7,6 +7,7 @@ import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 
+import com.client.MainForm.PrograssThread;
 import com.common.Function;
 
 import java.awt.event.*;
@@ -30,6 +31,8 @@ implements ActionListener,Runnable,MouseListener{
     String myId,myRoom;
     int selRow=-1;
     PrograssThread pt;
+    static boolean bthread;
+    int score=0;
     public MainForm()
     {
     	setLayout(card);
@@ -59,6 +62,7 @@ implements ActionListener,Runnable,MouseListener{
     	cr.b2.addActionListener(this);
     	cr.b1.addActionListener(this);
     	cr.tf.addActionListener(this);
+    	cr.daptf.addActionListener(this);
     	iv.table.addMouseListener(this);
     	/*
     	 *   ActionListener : JButton,JMenu,TextField
@@ -282,7 +286,17 @@ implements ActionListener,Runnable,MouseListener{
 		}
 		else if(e.getSource()==cr.b2)
 		{
-			
+			cr.gr.index++;
+			if(cr.gr.index>9)
+			{
+				cr.b2.setEnabled(false);
+				
+				JOptionPane.showMessageDialog(this,"게임을 종료합니다\n총 점수:"+score+"점");
+				pt.interrupt();
+				bthread=false;
+			}
+			cr.daptf.setEnabled(true);
+			cr.gr.setImage(cr.gr.index);
 		}
 		else if(e.getSource()==cr.b3)
 		{
@@ -303,13 +317,52 @@ implements ActionListener,Runnable,MouseListener{
 			}catch(Exception ex){}
 			cr.tf.setText("");
 		}
+		
+		else if(e.getSource()==cr.daptf)
+		{
+			String dap=cr.daptf.getText();
+			if(dap.length()<1)
+			{
+				JOptionPane.showMessageDialog(this,"답을 입력하세요");
+			    cr.daptf.requestFocus();	
+				return;
+			}
+			String temp=cr.gr.filename;
+			//System.out.println(temp);
+			String mun=temp.substring(0,temp.lastIndexOf("."));
+			if(dap.equals(mun))
+			{
+				Image img=getImageSizeChange(new ImageIcon("Image\\o.png"), cr.p1.getWidth(), cr.p1.getHeight());
+				cr.p1.setLayout(new BorderLayout());
+				cr.p1.removeAll();
+				cr.p1.add("Center",
+		    			new JLabel(new ImageIcon(img)));
+		    	cr.p1.validate();
+		    	score+=10;
+		    	
+			}
+			else
+			{
+				Image img=getImageSizeChange(new ImageIcon("Image\\x.png"), cr.p1.getWidth(), cr.p1.getHeight());
+				cr.p1.setLayout(new BorderLayout());
+				cr.p1.removeAll();
+				cr.p1.add("Center",
+		    			new JLabel(new ImageIcon(img)));
+		    	cr.p1.validate();
+		    	cr.gr.setImage(temp);
+		    	score-=10;
+		    	
+			}
+			cr.daptf.setText("");
+			cr.daptf.setEnabled(false);
+		}
 	}
 	public void connection(String id,String name,
 			  String sex,int avata)
 	{
 		try
 		{
-			s=new Socket("211.238.142.63",7788);
+			s=new Socket("211.238.142.63",7788); 
 			in=new BufferedReader(
 					new InputStreamReader(s.getInputStream())); 
 			out=s.getOutputStream();
@@ -595,9 +648,11 @@ implements ActionListener,Runnable,MouseListener{
 				    {
 				    	JOptionPane.showMessageDialog(this, "게임을 시작합니다!!");
 				    	cr.gr.setImage(0);
+				    	cr.b1.setEnabled(false);
 				    	cr.b2.setEnabled(true);
 				    	cr.daptf.setEnabled(true);
 				    	cr.daptf.requestFocus();
+				    	bthread=true;
 				    	pt=new PrograssThread();
 				    	pt.start();
 				    }
@@ -684,25 +739,32 @@ implements ActionListener,Runnable,MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
-    class PrograssThread extends Thread
+	class PrograssThread extends Thread
     {
     	public void run()
     	{
     		int k=0;
-    		while(true)
+    		while(bthread)
     		{
     			try
     			{
     				cr.bar.setValue(k);
     				Thread.sleep(300);
     				k++;
-    				if(k==0)
+    				if(k==100)
     				{
+    					JOptionPane.showMessageDialog(MainForm.this, "총 점수:"+score+"점");
     					interrupt();
     				}
     			}catch(Exception ex){}
     		}
     	}
+    }
+    public Image getImageSizeChange(ImageIcon icon,int width,int height)
+    {
+    	Image img=icon.getImage();
+    	Image change=img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+    	return change;
     }
    
 }
