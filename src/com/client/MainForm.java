@@ -311,7 +311,7 @@ implements ActionListener,Runnable,MouseListener{
 		{
 			s=new Socket("211.238.142.63",7788);
 			in=new BufferedReader(
-					new InputStreamReader(s.getInputStream()));
+					new InputStreamReader(s.getInputStream())); 
 			out=s.getOutputStream();
 			
 			// 데이터 전송
