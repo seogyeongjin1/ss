@@ -12,6 +12,7 @@ public class GameRoom extends JPanel{
 		   "지민.jpg","차은우.jpg","케이윌.jpg","피오.jpg",
 		   "하성운.jpg","한지민.jpg",
 		   "헨리.jpg","홍진영.jpg"};
+
    private String path="Image\\gameImage\\";
    int index=0;
    Image img;
