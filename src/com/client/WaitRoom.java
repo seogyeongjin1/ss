@@ -57,11 +57,14 @@ public class WaitRoom extends JPanel{
     	   };
     	   table1=new JTable(model1);
     	   JScrollPane js2=new JScrollPane(table1);
-    	   
+    	
     	   
     	   table1.setRowHeight(27);
     	   table1.getTableHeader().setReorderingAllowed(false);
     	   table1.getTableHeader().setResizingAllowed(false);
+    	   
+    	   table2.getTableHeader().setReorderingAllowed(false);
+    	   table2.getTableHeader().setResizingAllowed(false);
     	   
     	   String[] col2={"ID","대화명","성별","위치"};
     	   String[][] row2=new String[0][4];

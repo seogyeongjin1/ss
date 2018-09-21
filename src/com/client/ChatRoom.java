@@ -93,6 +93,12 @@ public class ChatRoom extends JPanel{
     	   p1.add(daptf);
     	   p1.setBounds(215, 555, 810, 50);
     	   add(p1);
+    	   
+    	   
+    	   table.getTableHeader().setReorderingAllowed(false);
+    	   table.getTableHeader().setResizingAllowed(false);
+    	   
+    	   
     	  /* for(int i=0;i<3;i++)
     	   {
     		   pan[i].setBackground(Color.black);

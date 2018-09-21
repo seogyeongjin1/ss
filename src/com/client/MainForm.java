@@ -647,6 +647,7 @@ implements ActionListener,Runnable,MouseListener{
 				    case Function.GAMESTART:
 				    {
 				    	JOptionPane.showMessageDialog(this, "게임을 시작합니다!!");
+				    	cr.gr.index=0;
 				    	cr.gr.setImage(0);
 				    	cr.b1.setEnabled(false);
 				    	cr.b2.setEnabled(true);

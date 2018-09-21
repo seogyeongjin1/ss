@@ -30,7 +30,7 @@ public class MakeRoom extends JFrame implements ActionListener{
     	 rb1.setSelected(true);
     	 
     	 box=new JComboBox();
-    	 for(int i=2;i<=6;i++)
+    	 for(int i=2;i<=4;i++)
     	 {
     		 box.addItem(i+"Έν");
     		 /*

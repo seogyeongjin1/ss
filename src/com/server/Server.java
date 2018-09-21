@@ -278,7 +278,7 @@ public class Server implements Runnable{
 									messageAll(Function.WAITUPDATE+"|"
 											+id+"|"+pos+"|"+room.roomName+"|"
 											+room.current+"|"+room.maxcount);
-									if(room.current==4)
+									if(room.current==room.maxcount)
 									{
 										for(int k=0;k<room.userVc.size();k++)
 										{
