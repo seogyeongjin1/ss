@@ -29,6 +29,7 @@ public class ChatRoom extends JPanel{
        GameRoom gr=new GameRoom();
        JProgressBar bar=new JProgressBar();
        JTextField daptf=new JTextField(15);
+       JScrollBar bar1;
        public ChatRoom()
        {
     	   back=Toolkit.getDefaultToolkit().getImage("Image\\2.jpg");
@@ -110,6 +111,7 @@ public class ChatRoom extends JPanel{
     		   add(idtf[i]);
     		   k++;
     	   }*/
+    	   bar1= js1.getVerticalScrollBar();
     	   gr.setBounds(215, 15, 810, 495); // 문제나오는 창
            add(gr);
            js1.setBounds(10, 610, 1220 , 200); // textArea

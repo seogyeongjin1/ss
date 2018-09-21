@@ -58,6 +58,7 @@ implements ActionListener,Runnable,MouseListener{
     	cr.b3.addActionListener(this);
     	cr.b2.addActionListener(this);
     	cr.b1.addActionListener(this);
+    	cr.tf.addActionListener(this);
     	iv.table.addMouseListener(this);
     	/*
     	 *   ActionListener : JButton,JMenu,TextField
@@ -290,13 +291,25 @@ implements ActionListener,Runnable,MouseListener{
 				out.write((Function.ROOMOUT+"|"+myRoom+"\n").getBytes());
 			}catch(Exception ex){}
 		}
+		
+		else if(e.getSource()==cr.tf)
+		{
+			String data=cr.tf.getText().trim();
+			if(data.length()<1)
+			      return;
+			try
+			{
+				out.write((Function.ROOMCHAT+"|"+data+"\n").getBytes());
+			}catch(Exception ex){}
+			cr.tf.setText("");
+		}
 	}
 	public void connection(String id,String name,
 			  String sex,int avata)
 	{
 		try
 		{
-			s=new Socket("211.238.142.55",7788);
+			s=new Socket("211.238.142.63",7788);
 			in=new BufferedReader(
 					new InputStreamReader(s.getInputStream()));
 			out=s.getOutputStream();
@@ -317,6 +330,7 @@ implements ActionListener,Runnable,MouseListener{
 			while(true)
 			{
 				String msg=in.readLine();
+				System.out.println(msg);
 				StringTokenizer st=
 						new StringTokenizer(msg,"|");
 				int protocol=Integer.parseInt(st.nextToken());
@@ -469,6 +483,7 @@ implements ActionListener,Runnable,MouseListener{
 				    case Function.ROOMCHAT:
 				    {
 				    	cr.ta.append(st.nextToken()+"\n");
+				    	cr.bar1.setValue(cr.bar1.getMaximum());
 				    }
 				    break;
 				    case Function.WAITUPDATE:

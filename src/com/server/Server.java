@@ -70,6 +70,7 @@ public class Server implements Runnable{
 		
 		String id,name,sex,pos;
 		int avata;
+		String rn;
 		public Client(Socket s)
 		{
 			try
@@ -197,6 +198,7 @@ public class Server implements Runnable{
 							messageTo(Function.MYROOMIN+"|"
 									+id+"|"+name+"|"
 									+sex+"|"+avata+"|"+room.roomName);
+							rn = room.roomName;
 							
 							// 출력 ==> client
 							messageAll(Function.ROOMNAMEUPDATE+"|"
@@ -206,7 +208,7 @@ public class Server implements Runnable{
 						break;
 						case Function.GAMESTART:
 						{
-							String rn=st.nextToken();
+							rn=st.nextToken();
 							for(int i=0;i<roomVc.size();i++)
 							{
 								Room room=roomVc.elementAt(i);
@@ -240,7 +242,7 @@ public class Server implements Runnable{
 							 *        
 							 *   강퇴 , 초대 , 게임 
 							 */
-							String rn=st.nextToken();
+							rn=st.nextToken();
 							for(int i=0;i<roomVc.size();i++)
 							{
 								Room room=roomVc.elementAt(i);
@@ -309,7 +311,7 @@ public class Server implements Runnable{
 							 *        
 							 *   강퇴 , 초대 , 게임 
 							 */
-							String rn=st.nextToken();
+							rn=st.nextToken();
 							for(int i=0;i<roomVc.size();i++)
 							{
 								Room room=roomVc.elementAt(i);
@@ -350,6 +352,27 @@ public class Server implements Runnable{
 							}
 						}
 						break;
+						
+						case Function.ROOMCHAT:
+						{
+							String chat=st.nextToken();
+							for(int i=0;i<roomVc.size();i++)
+							{
+								Room room=roomVc.elementAt(i);
+								if(rn.equals(room.roomName))
+								{
+									for(int j=0;j<room.userVc.size();j++)
+									{
+										Client user=room.userVc.elementAt(j);
+										user.messageTo(Function.ROOMCHAT
+												+"|["+name+"]" + chat);
+									}
+								}	
+							}
+						}
+						break;				
+						
+						
 						case Function.INVATE:
 						{
 							String yid=st.nextToken();
